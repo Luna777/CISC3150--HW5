@@ -1,6 +1,6 @@
 //CISC 3150
 //XIN GUAN
-//10/02/2015
+//10/07/2015
 //
 //Short Description:
 // let's set the radius of the circle, r=1, and the center is
@@ -22,42 +22,35 @@
 public class HW5Q2{
 	public static void main(String[] args){	
 		
-		double myPis=0;
-		
+		double x, y, d;
+		double total=0; //total points falled inside the circle
+		int inside=0;
 		//running 20 loops for picking 200,000,000 points
 		for(int i=0; i<20; i++){
-			mc mymc=new mc();
-			myPis=myPis+mymc.get(); 
+			inside=0;
+			//randomly generate 200,000,000 points 
+			//and return how many times inside the circle.
+			for(int j=0; j<200000000; j++){
+				//get random x,y both from 0 to 1
+				x= Math.random(); 
+				y= Math.random();
+				//the distance from (x,y) to center,(0,0)
+				d= Math.sqrt(x*x + y*y);
+				
+				if(d<=1){
+					inside++;//counter
+				}
+			}
+			
+			total=total+inside;
 			//give some output for long time running
 			System.out.println("----running-"+(i+1)*5+"%----");	
 		}
 		
-		System.out.println("\n My Pi is: "+ myPis*4/4000000000.0);
+		System.out.println("\n My Pi is: "+ total*4/4000000000.0);
 	}
 }
 
-class mc{
-	private double x, y;
-	private double d;
-	
-	private int inside=0; //counter
-	
-	public int get(){
-		//randomly generate 200,000,000 points 
-		//and return how many times inside the circle.
-		for(int i=0; i<200000000 ; i++){			
-			x= Math.random();
-			y= Math.random();
-			d= Math.sqrt(x*x + y*y);
-			
-			if(d<=1){
-				inside++; //counter
-			}
-		}		
-		int times=inside;
-		return times;
-	}
-}
 
 
 
